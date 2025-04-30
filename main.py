@@ -57,6 +57,14 @@ if __name__=='__main__':
 
     Structure your response clearly using Markdown headings for each section. Prioritize accuracy but ensure the language is accessible and concepts are simplified appropriately for the intended audience. Focus on *explanation* and *context*, not just summarization.
     """
-    response = client.models.generate_content(model='gemini-1.5-pro-001',contents=[prompt, file])
-    print(response.text)
+    try:
+        response = client.models.generate_content(model='gemini-1.5-pro-001',contents=[prompt, file])
+        print(response.text)
+    except Exception as e:
+        print(f"Error generating content with Gemini: {e}")
+    finally:
+        try:
+            client.files.delete(file.name)
+        except Exception as delete_error:
+            print(f"Warning: Failed to delete uploaded file {file.name}: {e}")
     
