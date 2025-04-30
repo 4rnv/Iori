@@ -60,6 +60,9 @@ if __name__=='__main__':
     try:
         response = client.models.generate_content(model='gemini-1.5-pro-001',contents=[prompt, file])
         print(response.text)
+        with open(f"{file.name}.md", "w") as f:
+            f.write(response.text)
+
     except Exception as e:
         print(f"Error generating content with Gemini: {e}")
     finally:
@@ -67,4 +70,3 @@ if __name__=='__main__':
             client.files.delete(name=file.name)
         except Exception as delete_error:
             print(f"Warning: Failed to delete uploaded file {file.name}: {delete_error}")
-    
