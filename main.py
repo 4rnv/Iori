@@ -12,7 +12,7 @@ def parsePaper(filepath : str):
     output_dir = "output"
     os.makedirs(output_dir, exist_ok=True)
     try:
-        md_text = pymupdf4llm.to_markdown(f'{filepath}', ignore_code=False, ignore_images=False, embed_images=True, show_progress=True)
+        md_text = pymupdf4llm.to_markdown(f'{filepath}', ignore_code=False, ignore_images=True, show_progress=True)
         timestamp_filename = f"{int(time.time())}.md"
         md_filepath = os.path.join(output_dir, timestamp_filename)
         pathlib.Path(md_filepath).write_bytes(md_text.encode('utf-8'))
@@ -40,7 +40,7 @@ if __name__=='__main__':
 
     md_filepath = parsePaper(filepath)
     client = gai.Client(api_key=os.getenv("GOOGLE_API_KEY"))
-    file = client.files.upload(file=md_filepath)
+    file = client.files.upload(file=filepath)
     prompt = f"""
     Please act as a research assistant tasked with explaining the attached research paper ({file.display_name}).
     Your explanation should be targeted towards an **undergraduate or master's student** in a related scientific field who may not be familiar with the specific jargon or advanced techniques used in this paper.
@@ -64,7 +64,7 @@ if __name__=='__main__':
         print(f"Error generating content with Gemini: {e}")
     finally:
         try:
-            client.files.delete(file.name)
+            client.files.delete(name=file.name)
         except Exception as delete_error:
-            print(f"Warning: Failed to delete uploaded file {file.name}: {e}")
+            print(f"Warning: Failed to delete uploaded file {file.name}: {delete_error}")
     
