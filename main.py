@@ -42,20 +42,20 @@ if __name__=='__main__':
     client = gai.Client(api_key=os.getenv("GOOGLE_API_KEY"))
     file = client.files.upload(file=filepath)
     prompt = f"""
-    Please act as a research assistant tasked with explaining the attached research paper ({file.display_name}).
+    Please act as a research assistant tasked with explaining the attached research paper ({file.name}).
     Your explanation should be targeted towards an **undergraduate or master's student** in a related scientific field who may not be familiar with the specific jargon or advanced techniques used in this paper.
 
     Analyze the entire document and provide a comprehensive explanation covering the following points:
 
-    1.  **Executive Summary:** A brief overview (2-3 sentences) of the paper's main goal and key finding.
+    1.  **Executive Summary:** A brief overview of the paper's main goal and key finding.
     2.  **Core Problem & Objective:** What specific problem does this research address? What was the primary objective or research question?
-    3.  **Key Concepts & Jargon Explained:** Identify 5-10 of the most crucial technical terms, acronyms, or specialized concepts. For each, provide a clear and concise definition or explanation suitable for the target audience.
+    3.  **Key Concepts & Jargon Explained:** Identify 5-10 of the most crucial technical terms, acronyms, or specialized concepts. For each, provide a clear and concise explanation suitable for the target audience.
     4.  **Methodology Simplified:** Describe the core methodology or experimental approach. Explain the logic behind *why* these methods were chosen and what they aimed to measure or analyze, without excessive technical detail. Focus on the workflow and purpose.
     5.  **Main Findings & Results:** Summarize the key results presented. What were the significant outcomes of the experiments or analyses? Use simple terms to explain what the findings mean.
     6.  **Significance & Contribution:** Explain the importance of this research. How does it advance the field? What are its potential applications or implications?
     7.  **Limitations & Future Work:** Briefly mention any key limitations acknowledged by the authors and potential future research directions suggested.
 
-    Structure your response clearly using Markdown headings for each section. Prioritize accuracy but ensure the language is accessible and concepts are simplified appropriately for the intended audience. Focus on *explanation* and *context*, not just summarization.
+    Structure your response clearly using Markdown headings for each section. Prioritize accuracy but ensure the language is accessible and concepts are simplified appropriately for the intended audience. Focus on *explanation* and *context*, also explain the math behind the paper At the end, suggest and link some resources to understand the concepts explored in the paper.
     """
     try:
         response = client.models.generate_content(model='gemini-1.5-pro-001',contents=[prompt, file])
