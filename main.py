@@ -43,7 +43,7 @@ if __name__=='__main__':
     file = client.files.upload(file=filepath)
     prompt = f"""
     Please act as a research assistant tasked with explaining the attached research paper ({file.name}).
-    Your explanation should be targeted towards an **undergraduate or master's student** in a related scientific field who may not be familiar with the specific jargon or advanced techniques used in this paper.
+    Your explanation should be targeted towards a research scholar in a related scientific field who may not be familiar with the specific jargon or advanced techniques used in this paper.
 
     Analyze the entire document and provide a comprehensive explanation covering the following points:
 
@@ -55,7 +55,7 @@ if __name__=='__main__':
     6.  **Significance & Contribution:** Explain the importance of this research. How does it advance the field? What are its potential applications or implications?
     7.  **Limitations & Future Work:** Briefly mention any key limitations acknowledged by the authors and potential future research directions suggested.
 
-    Structure your response clearly using Markdown headings for each section. Prioritize accuracy but ensure the language is accessible and concepts are simplified appropriately for the intended audience. Focus on *explanation* and *context*, also explain the math behind the paper At the end, suggest and link some resources to understand the concepts explored in the paper.
+    Structure your response clearly using Markdown headings for each section. Your objective is knowledge distillation. Focus on *explanation* and *context*, also explain the math behind the paper At the end, suggest and link some resources to understand the concepts explored in the paper.
     """
     try:
         response = client.models.generate_content(model='gemini-1.5-pro-001',contents=[prompt, file])

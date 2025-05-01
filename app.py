@@ -91,17 +91,20 @@ def explain(arxiv_url,uploaded_file):
                 print(f"Warning: Failed to delete Gemini file {uploaded_gemini_file.name}: {delete_err}")
 
 with gr.Blocks(title='IScream',css="*{border-radius:1rem 0 !important;}") as demo:  
-    gr.Markdown('# Research Paper Explainer')
+    gr.Markdown(
+        """
+        ## Research Paper Distillation
+        Enter an arXiv URL **OR** upload a PDF file to get a distilled explanation.
+        """)
     with gr.Row(equal_height=True):
-        arxiv_url = gr.Textbox(label="arXiv URL", placeholder="Enter arxiv URL")
-        # gr.Markdown('## OR')
+        arxiv_url = gr.Textbox(label="arXiv URL", placeholder="Enter arxiv URL",info="Enter the URL for the paper's abstract page or link directly to the PDF.")
         upload_input = gr.File(label="Upload PDF", file_types=['.pdf'])
     explain_button = gr.Button("Explain Paper", variant="primary")
 
-    with gr.Column():
-        gr.Markdown("## Explanation")
+
+    with gr.Accordion(label="Explanation"):
         explanation_output = gr.Markdown(label="Gemini Explanation")
-        # gr.Markdown("## Download Explanation")
+        gr.Markdown("### Download Explanation")
         download_output = gr.File(label="Download Explanation (.md)")
 
     explain_button.click(
