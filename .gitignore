@@ -4,3 +4,4 @@ enviori/
 output/
 *.md
 *.sty
+__pycache__/
