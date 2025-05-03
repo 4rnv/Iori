@@ -1,6 +1,6 @@
 ## Research Paper Distiller
 
-A research paper summarization tool that generates comprehensive, accessible explanations of academic papers from arxiv.org. Helps develop foundational understanding by simplifying obfuscated academia-speak.
+A research paper summarization tool that generates comprehensive, accessible explanations of academic papers from arxiv.org. Helps develop foundational understanding by simplifying obfuscated academia-speak. Recommends additional resources related to the topic.
 
 Requires a Google Gemini API key.
 
