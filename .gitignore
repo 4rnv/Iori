@@ -2,6 +2,6 @@
 pdfs/
 enviori/
 output/
-*.md
+ai_output/
 *.sty
 __pycache__/
