@@ -90,7 +90,7 @@ def explain(arxiv_url,uploaded_file):
             except Exception as delete_err:
                 print(f"Warning: Failed to delete Gemini file {uploaded_gemini_file.name}: {delete_err}")
 
-with gr.Blocks(title='IScream',css="*{border-radius:1rem 0 !important;}") as demo:  
+with gr.Blocks(title='Iori',css="*{border-radius:1rem 0 !important;}") as demo:  
     gr.Markdown(
         """
         ## Research Paper Distillation
